@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>先云川个人网站</title>
+    <style>
+      /* ---------- 颜色变量 ---------- */
+      :root {
+        --primary-color: #2c3e50; /* 主色调 */
+        --secondary-color: #3498db; /* 辅助色 */
+        --accent-color: #e74c3c; /* 强调色 */
+      }
+
+      /* ---------- 基础样式 ---------- */
+      body {
+        font-family: "Segoe UI", Arial, sans-serif;
+        line-height: 1.8;
+        margin: 0;
+        padding-top: 70px;
+        background-color: #f5f6fa;
+      }
+      /* ↓↓↓↓↓↓↓ 新增的通用设置 ↓↓↓↓↓↓↓ */
+      section {
+        scroll-margin-top: 70px; /* 解决导航栏遮挡问题 */
+        padding: 50px 20px; /* 给所有区块添加内边距 */
+      }
+
+      /* ---------- 导航栏 ---------- */
+      nav {
+        background: var(--primary-color);
+        padding: 1rem;
+        position: fixed;
+        width: 100%;
+        top: 0;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      }
+
+      nav ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        justify-content: center;
+        gap: 3rem;
+      }
+
+      nav a {
+        color: white;
+        text-decoration: none;
+        font-weight: 500;
+        transition: all 0.3s;
+        padding: 5px 10px;
+        border-radius: 4px;
+      }
+
+      nav a:hover {
+        background: var(--secondary-color);
+      }
+
+      /* ---------- 个人信息 ---------- */
+      #personal-information {
+        background: linear-gradient(135deg, #f8f9fa 50%, #ffffff 50%);
+        padding: 4rem 20px;
+        display: flex;
+        justify-content: center;
+      }
+
+      .profile-container {
+        max-width: 600px;
+        width: 100%;
+        background: white;
+        border-radius: 10px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        padding: 3rem;
+      }
+
+      .profile-card {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1.5rem;
+        margin-bottom: 2rem;
+      }
+
+      .profile-photo {
+        width: 158px;
+        height: 168px;
+        object-fit: cover;
+        border-radius: 50%; /* 圆形照片 */
+        border: 5px solid var(--secondary-color);
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+      }
+
+      .name {
+        font-size: 1.2rem;
+        color: var(--primary-color);
+        text-align: center;
+        margin: 0;
+        letter-spacing: 1px;
+      }
+
+      .personal-desc {
+        font-size: 1.1rem;
+        line-height: 1.8;
+        color: #555;
+        text-align: center;
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 20px;
+        position: relative;
+      }
+
+      /* ---------- 教育背景 ---------- */
+      .education-timeline {
+        border-left: 3px solid var(--secondary-color);
+        padding-left: 30px;
+        margin-left: 15px;
+      }
+
+      /* ---------- 技能与荣誉 ---------- */
+      .skills-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 30px;
+        background: white;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      }
+
+      .skill-category {
+        padding: 20px;
+        border-left: 4px solid var(--secondary-color);
+        background: #f8f9fa;
+        border-radius: 5px;
+      }
+
+      .skill-category h3 {
+        color: var(--primary-color);
+        margin-top: 0;
+        padding-bottom: 10px;
+        border-bottom: 2px solid var(--secondary-color);
+      }
+
+      .honor-list li {
+        padding: 10px;
+        margin: 8px 0;
+        background: #f8f9fa;
+        border-radius: 4px;
+        position: relative;
+        padding-left: 30px;
+      }
+
+      .honor-list li::before {
+        content: "🏆";
+        position: absolute;
+        left: 10px;
+      }
+
+      /* ---------- 响应式设计 ---------- */
+      @media (max-width: 768px) {
+        .profile-header {
+          grid-template-columns: 1fr;
+        }
+
+        nav ul {
+          gap: 1.5rem;
+        }
+
+        .skills-container {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- 导航栏 -->
+    <nav>
+      <ul>
+        <li><a href="#personal-information">个人信息</a></li>
+        <li><a href="#educational-background">教育背景</a></li>
+        <li><a href="#research-experience">科研经历</a></li>
+        <li><a href="#publications">论文作品</a></li>
+        <li><a href="#skills-and-honors">技能与荣誉</a></li>
+      </ul>
+    </nav>
+
+    <!-- 个人信息 -->
+    <section id="personal-information">
+      <div class="profile-container">
+        <!-- 照片和姓名 -->
+        <div class="profile-card">
+          <img
+            src="images/profile-photo.jpg"
+            alt="先云川照片"
+            class="profile-photo"
+          />
+        </div>
+
+        <!-- 详细信息 -->
+        <p class="personal-desc">
+          先云川，2001年2月生，中共党员，环境科学与工程专业硕士研究生，籍贯四川泸州。作为水污染控制工程领域的研究者，聚焦污染物去除机制解析与微生物代谢过程研究，具备独立开展实验设计、污泥测序及宏基因组数据分析的能力，擅长运用Origin、RStudio等工具实现环境数据的可视化建模。在科研实践中，熟练掌握FT-IR、FS、UV-Vis等分析检测技术，擅长宏基因组、宏转录组、代谢组学等多组学联用。参与构建ABR-MFC耦合生物反应器体系，相关成果发表SCI一区论文2篇，获2024硕士研究生国家奖学金。持有初中数学教师资格证及CET-6证书。学术之余，长期保持健身习惯，将运动竞技中的专注力与科研创新深度融合。
+        </p>
+      </div>
+    </section>
+
+    <!-- 教育背景 -->
+    <section id="educational-background">
+      <h2 style="color: var(--primary-color); margin-bottom: 2rem">教育背景</h2>
+      <div class="education-timeline">
+        <div style="margin-bottom: 2rem">
+          <h3 style="color: var(--secondary-color); margin: 0 0 10px">
+            广西师范大学
+          </h3>
+          <p style="font-size: 1.1rem; margin: 5px 0">
+            ▶ 2018.09 - 2022.06 环境工程（本科）
+          </p>
+          <p style="font-size: 1.1rem; margin: 5px 0">
+            ▶ 2022.09 - 2025.06 环境科学与工程（硕士）
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 科研经历 -->
+    <section id="research-experience">
+      <h2 style="color: var(--primary-color); margin-bottom: 2rem">科研经历</h2>
+      <div
+        style="
+          background: white;
+          padding: 30px;
+          border-radius: 10px;
+          box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        "
+      >
+        <div style="margin-bottom: 2rem">
+          <h3 style="color: var(--secondary-color)">
+            MEC-ABR耦合生物反应器对N-甲基吡咯烷酮去除过程及其微生物代谢机制研究
+          </h3>
+          <p style="line-height: 1.8">
+            ▪ 参与实验设计<br />
+            ▪ 承担污泥测序工作<br />
+            ▪ 负责宏基因组数据分析及可视化<br />
+            ▪ 整理数据并撰写研究报告
+          </p>
+        </div>
+        <div>
+          <h3 style="color: var(--secondary-color)">
+            MEC-吸附生物耦合体系中新烟碱农药去除过程及其微生物代谢机制研究
+          </h3>
+          <p style="line-height: 1.8">
+            ▪ 实验可行性评估<br />
+            ▪ 代谢产物分析实验<br />
+            ▪ LC-MS及NMR数据分析<br />
+            ▪ 报告撰写与成果总结
+          </p>
+        </div>
+      </div>
+    </section>
+    <!-- 论文作品 -->
+    <section
+      id="publications"
+      style="margin: 4rem auto; max-width: 1200px; padding: 0 2rem"
+    >
+      <h2 style="color: var(--primary-color); margin-bottom: 2rem">论文作品</h2>
+      <div
+        class="publications-container"
+        style="
+          background: white;
+          padding: 30px;
+          border-radius: 10px;
+          box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        "
+      >
+        <!-- 第一篇 -->
+        <div
+          class="publication-item"
+          style="
+            margin-bottom: 2.5rem;
+            border-left: 4px solid var(--secondary-color);
+            padding-left: 1.5rem;
+          "
+        >
+          <a
+            href="https://doi.org/10.1016/j.watres.2023.119863"
+            target="_blank"
+            rel="noopener noreferrer"
+            style="text-decoration: none; color: inherit"
+          >
+            <h3
+              style="
+                color: var(--primary-color);
+                margin: 0 0 10px;
+                transition: color 0.3s;
+              "
+            >
+              Fe(III) enhances Cr(VI) bioreduction in a MFC-granular sludge
+              coupling system
+              <span style="font-size: 0.8em; margin-left: 10px">🔗</span>
+            </h3>
+          </a>
+          <p style="color: #666; line-height: 1.6; margin: 8px 0">
+            Su, C. Y., <strong>Xian, Y. C.</strong>, Qin, R. H., et al.
+            <em>Water Research</em> 2023, 235,119863.
+            <span
+              style="
+                display: inline-block;
+                background: #e74c3c20;
+                color: var(--accent-color);
+                padding: 2px 8px;
+                border-radius: 4px;
+                margin-left: 1rem;
+              "
+              >SCI一区 (IF=11.4)</span
+            >
+          </p>
+        </div>
+
+        <!-- 第二篇 -->
+        <div
+          class="publication-item"
+          style="
+            margin-bottom: 2.5rem;
+            border-left: 4px solid var(--secondary-color);
+            padding-left: 1.5rem;
+          "
+        >
+          <a
+            href="https://doi.org/10.1016/j.jhazmat.2024.136548"
+            target="_blank"
+            rel="noopener noreferrer"
+            style="text-decoration: none; color: inherit"
+          >
+            <h3
+              style="
+                color: var(--primary-color);
+                margin: 0 0 10px;
+                transition: color 0.3s;
+              "
+            >
+              Metagenomics and metaproteomics reveal the effects of sludge types
+              on DMF degradation
+              <span style="font-size: 0.8em; margin-left: 10px">🔗</span>
+            </h3>
+          </a>
+          <p style="color: #666; line-height: 1.6; margin: 8px 0">
+            <strong>Xian, Y.C.</strong>, Cao, L.L., Lu, Y.X., et al.
+            <em>Journal of Hazardous Materials</em> 2024, 481, 136548.
+            <span
+              style="
+                display: inline-block;
+                background: #e74c3c20;
+                color: var(--accent-color);
+                padding: 2px 8px;
+                border-radius: 4px;
+                margin-left: 1rem;
+              "
+              >SCI一区 (IF=12.2)</span
+            >
+          </p>
+        </div>
+
+        <!-- 第三篇 -->
+        <div
+          class="publication-item"
+          style="
+            margin-bottom: 2.5rem;
+            border-left: 4px solid var(--secondary-color);
+            padding-left: 1.5rem;
+          "
+        >
+          <a
+            href="https://doi.org/10.1016/j.chemosphere.2024.143024"
+            target="_blank"
+            rel="noopener noreferrer"
+            style="text-decoration: none; color: inherit"
+          >
+            <h3
+              style="
+                color: var(--primary-color);
+                margin: 0 0 10px;
+                transition: color 0.3s;
+              "
+            >
+              Removal of organic matter from food wastewater using anaerobic
+              digestion
+              <span style="font-size: 0.8em; margin-left: 10px">🔗</span>
+            </h3>
+          </a>
+          <p style="color: #666; line-height: 1.6; margin: 8px 0">
+            <strong>Xian, Y.C.</strong>, Lu, Y.Q, Wang, Z., et al.
+            <em>Chemosphere</em> 2024, 364, 143024.
+            <span
+              style="
+                display: inline-block;
+                background: #3498db20;
+                color: var(--secondary-color);
+                padding: 2px 8px;
+                border-radius: 4px;
+                margin-left: 1rem;
+              "
+              >SCI二区 (IF=8.1)</span
+            >
+          </p>
+        </div>
+
+        <!-- 第四篇 -->
+        <div
+          class="publication-item"
+          style="
+            border-left: 4px solid var(--secondary-color);
+            padding-left: 1.5rem;
+          "
+        >
+          <a
+            href="https://link.cnki.net/doi/10.19674/j.cnki.issn1000-6923.2023.S1.014"
+            target="_blank"
+            rel="noopener noreferrer"
+            style="text-decoration: none; color: inherit"
+          >
+            <h3
+              style="
+                color: var(--primary-color);
+                margin: 0 0 10px;
+                transition: color 0.3s;
+              "
+            >
+              废水厌氧处理中溶解性甲烷直接利用研究进展
+              <span style="font-size: 0.8em; margin-left: 10px">🔗</span>
+            </h3>
+          </a>
+          <p style="color: #666; line-height: 1.6; margin: 8px 0">
+            <strong>先云川</strong>, 宿程远, 王梓, 等.
+            《中国环境科学》2023,43(S1):79-87.
+            <span
+              style="
+                display: inline-block;
+                background: #2c3e5020;
+                color: var(--primary-color);
+                padding: 2px 8px;
+                border-radius: 4px;
+                margin-left: 1rem;
+              "
+              >EI (IF=2.6)</span
+            >
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 技能与荣誉 -->
+    <section id="skills-and-honors">
+      <h2 style="color: var(--primary-color); margin-bottom: 2rem">
+        技能与荣誉
+      </h2>
+      <div class="skills-container">
+        <!-- 专业技能 -->
+        <div class="skill-category">
+          <h3>专业技能</h3>
+          <ul class="honor-list" style="list-style: none; padding-left: 0">
+            <li>Office 高级应用</li>
+            <li>Origin 数据可视化</li>
+            <li>RStudio 统计分析</li>
+            <li>SPSS 数据分析</li>
+            <li>Citespace 文献计量</li>
+          </ul>
+        </div>
+
+        <!-- 资格证书 -->
+        <div class="skill-category">
+          <h3>资格证书</h3>
+          <ul class="honor-list">
+            <li>大学英语六级（CET6）</li>
+            <li>C1机动车驾驶证</li>
+            <li>普通话二级乙等</li>
+            <li>初中数学教师资格证</li>
+          </ul>
+        </div>
+
+        <!-- 荣誉奖项 -->
+        <div class="skill-category">
+          <h3>所获荣誉</h3>
+          <ul class="honor-list">
+            <li>2024 硕士研究生国家奖学金</li>
+            <li>2023 学业一等奖学金</li>
+            <li>学院三好学生</li>
+            <li>学院学术之星</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <footer
+      style="
+        background: var(--primary-color);
+        color: white;
+        text-align: center;
+        padding: 2rem;
+        margin-top: 4rem;
+      "
+    >
+      <p style="margin: 0">📧 1939715258@qq.com | 📱 (+86) 18177373637</p>
+      <p style="margin: 1rem 0 0">© 2025 先云川 版权所有</p>
+    </footer>
+
+    <script>
+      // 平滑滚动
+      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+        anchor.addEventListener("click", function (e) {
+          e.preventDefault();
+          document.querySelector(this.getAttribute("href")).scrollIntoView({
+            behavior: "smooth",
+            block: "start",
+          });
+        });
+      });
+
+      // 导航栏高亮
+      window.addEventListener("scroll", () => {
+        document.querySelectorAll("section").forEach((sec) => {
+          const top = window.scrollY;
+          const offset = sec.offsetTop - 100;
+          const height = sec.offsetHeight;
+          if (top >= offset && top < offset + height) {
+            document.querySelectorAll("nav a").forEach((link) => {
+              link.style.background =
+                link.hash === `#${sec.id}`
+                  ? "var(--secondary-color)"
+                  : "transparent";
+            });
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
