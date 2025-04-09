@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>先云川个人网站</title>
+    <!-- === CSS 部分 === -->
     <style>
       /* ---------- 颜色变量 ---------- */
       :root {
@@ -65,6 +66,36 @@
         display: flex;
         justify-content: center;
       }
+      /* ---------- 模态框样式 ---------- */
+      .modal {
+        display: none;
+        position: fixed;
+        z-index: 1000;
+        padding-top: 20px; /* 调整后的顶部间距 */
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.9);
+      }
+
+      .modal-content {
+        margin: auto;
+        display: block;
+        max-width: 90%;
+        max-height: 80vh;
+        width: auto;
+        height: auto;
+        object-fit: contain;
+        border: 3px solid white;
+        border-radius: 4px;
+        transition: transform 0.3s; /* 添加缩放动画 */
+      }
+
+      .close:hover {
+        color: #bbb;
+        cursor: pointer;
+      }
 
       .profile-container {
         max-width: 600px;
@@ -121,7 +152,7 @@
       /* ---------- 技能与荣誉 ---------- */
       .skills-container {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        grid-template-columns: repeat(auto-fit, minmax(305px, 1fr));
         gap: 30px;
         background: white;
         padding: 30px;
@@ -156,6 +187,34 @@
         content: "🏆";
         position: absolute;
         left: 10px;
+      }
+      /* 资格证书图标 */
+      #skills-and-honors .skill-category:nth-child(2) li::before {
+        content: "📜";
+        color: #3498db;
+      }
+
+      /* 荣誉奖项图标 */
+      #skills-and-honors .skill-category:nth-child(3) li::before {
+        content: "🏆";
+        color: #e74c3c;
+      }
+      /* 新增专业技能图标 */
+      #skills-and-honors .skill-category:nth-child(1) li::before {
+        content: "💻";
+        color: var(--secondary-color);
+        left: 8px;
+        font-size: 1.1em;
+      }
+
+      /* 悬浮动画 */
+      .honor-list li {
+        transition: transform 0.3s, box-shadow 0.3s;
+      }
+
+      .honor-list li:hover {
+        transform: translateX(10px);
+        box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.1);
       }
 
       /* ---------- 响应式设计 ---------- */
@@ -471,10 +530,18 @@
         <div class="skill-category">
           <h3>资格证书</h3>
           <ul class="honor-list">
-            <li>大学英语六级（CET6）</li>
-            <li>C1机动车驾驶证</li>
-            <li>普通话二级乙等</li>
-            <li>初中数学教师资格证</li>
+            <li data-image="images/Certification/cet6.jpg">
+              大学英语六级证书（CET6）
+            </li>
+            <li data-image="images/Certification/c1jiazhao.jpg">
+              C1机动车驾驶证
+            </li>
+            <li data-image="images/Certification/putonghua.jpg">
+              普通话二级乙等证书
+            </li>
+            <li data-image="images/Certification/shuxuelaoshi.jpg">
+              初中数学教师资格证
+            </li>
           </ul>
         </div>
 
@@ -482,10 +549,19 @@
         <div class="skill-category">
           <h3>所获荣誉</h3>
           <ul class="honor-list">
-            <li>2024 硕士研究生国家奖学金</li>
-            <li>2023 学业一等奖学金</li>
-            <li>学院三好学生</li>
-            <li>学院学术之星</li>
+            <!-- ▲▲▲ 新增 data-image 属性 -->
+            <li data-image="images/honors/National-Scholarship.jpg">
+              2024硕士研究生国家奖学金
+            </li>
+            <li data-image="images/honors/First-Class-Scholarship.jpg">
+              2023 学业一等奖学金
+            </li>
+            <li
+              data-image="images/honors/Outstanding-Students-of-the-College.jpg"
+            >
+              学院三好学生
+            </li>
+            <li data-image="images/honors/Academic-Star.jpg">学院学术之星</li>
           </ul>
         </div>
       </div>
@@ -503,7 +579,13 @@
       <p style="margin: 0">📧 1939715258@qq.com | 📱 (+86) 18177373637</p>
       <p style="margin: 1rem 0 0">© 2025 先云川 版权所有</p>
     </footer>
-
+    <!-- === 模态框结构 === ▲▲▲ 新增 -->
+    <div id="image-modal" class="modal">
+      <span class="close">&times;</span>
+      <img class="modal-content" id="modal-img" />
+      <div id="caption"></div>
+    </div>
+    <!-- === JavaScript 部分 === -->
     <script>
       // 平滑滚动
       document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
@@ -531,6 +613,51 @@
             });
           }
         });
+      });
+      const modal = document.getElementById("image-modal");
+      const modalImg = document.getElementById("modal-img");
+
+      // 修改后的图片点击逻辑
+      document
+        .querySelectorAll("#skills-and-honors .honor-list li[data-image]") // ▲▲▲ 修改此处
+        .forEach((item) => {
+          item.style.cursor = "pointer";
+          item.addEventListener("click", function () {
+            const imgPath = this.dataset.image;
+            if (imgPath) {
+              modal.style.display = "block";
+              modalImg.src = imgPath;
+
+              // 新增图片尺寸适配
+              modalImg.onload = function () {
+                const viewportWidth = window.innerWidth;
+                const viewportHeight = window.innerHeight;
+
+                // 竖版图片特殊处理
+                if (this.naturalHeight > this.naturalWidth) {
+                  this.style.maxWidth =
+                    Math.min(600, viewportWidth * 0.6) + "px";
+                  this.style.maxHeight = viewportHeight * 0.9 + "px";
+                } else {
+                  // 横版图片常规处理
+                  this.style.maxWidth =
+                    Math.min(1000, viewportWidth * 0.9) + "px";
+                  this.style.maxHeight = viewportHeight * 0.8 + "px";
+                }
+              };
+            }
+          });
+        });
+      // 关闭模态框
+      document.querySelector(".close").addEventListener("click", () => {
+        modal.style.display = "none";
+      });
+
+      // 点击外部区域关闭
+      window.addEventListener("click", (e) => {
+        if (e.target == modal) {
+          modal.style.display = "none";
+        }
       });
     </script>
   </body>
