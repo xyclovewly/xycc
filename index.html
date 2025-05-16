@@ -18,7 +18,8 @@
         font-family: "Segoe UI", Arial, sans-serif;
         line-height: 1.8;
         margin: 0;
-        padding-top: 70px;
+        margin-top: 70px;
+        padding-top: 0;
         background-color: #f5f6fa;
       }
       /* ↓↓↓↓↓↓↓ 新增的通用设置 ↓↓↓↓↓↓↓ */
@@ -35,6 +36,7 @@
         width: 100%;
         top: 0;
         box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        z-index: 1000; /* 确保导航栏在最顶层 */
       }
 
       nav ul {
@@ -65,6 +67,7 @@
         padding: 4rem 20px;
         display: flex;
         justify-content: center;
+        padding: 4rem 20px 2rem;
       }
       /* ---------- 模态框样式 ---------- */
       .modal {
@@ -355,7 +358,7 @@
               "
             >
               Fe(III) enhances Cr(VI) bioreduction in a MFC-granular sludge
-              coupling system
+              coupling system: Experimental evidence and metagenomics analysis
               <span style="font-size: 0.8em; margin-left: 10px">🔗</span>
             </h3>
           </a>
@@ -399,7 +402,8 @@
               "
             >
               Metagenomics and metaproteomics reveal the effects of sludge types
-              on DMF degradation
+              and inoculation modes on N,N-dimethylformamide degradation
+              pathways and the microbial community involved
               <span style="font-size: 0.8em; margin-left: 10px">🔗</span>
             </h3>
           </a>
@@ -443,7 +447,9 @@
               "
             >
               Removal of organic matter from food wastewater using anaerobic
-              digestion
+              digestion at low temperatures enhanced by exogenous signaling
+              molecule N-hexanoyl-homoserine lactone enhancement: Insight to
+              extracellular polymeric substances and key functional genes
               <span style="font-size: 0.8em; margin-left: 10px">🔗</span>
             </h3>
           </a>
@@ -463,8 +469,53 @@
             >
           </p>
         </div>
-
         <!-- 第四篇 -->
+        <div
+          class="publication-item"
+          style="
+            margin-bottom: 2.5rem;
+            border-left: 4px solid var(--secondary-color);
+            padding-left: 1.5rem;
+          "
+        >
+          <a
+            href="https://doi.org/10.1016/j.seppur.2025.133048"
+            target="_blank"
+            rel="noopener noreferrer"
+            style="text-decoration: none; color: inherit"
+          >
+            <h3
+              style="
+                color: var(--primary-color);
+                margin: 0 0 10px;
+                transition: color 0.3s;
+              "
+            >
+              Treatment of 2,4-di-tert-butylphenol-containing wastewater with an
+              anaerobic baffle reactor coupled microbial fuel cell (ABR-MFC)
+              system: performance, microbial communities, and metabolic
+              functions
+              <span style="font-size: 0.8em; margin-left: 10px">🔗</span>
+            </h3>
+          </a>
+          <p style="color: #666; line-height: 1.6; margin: 8px 0">
+            <strong>Xian, Y.C.</strong>, Li, Q.H, He, Y., et al.
+            <em>Separation and Purification Technology</em> 2025, 368, 133048.
+            <span
+              style="
+                display: inline-block;
+                background: #3498db20;
+                color: var(--secondary-color);
+                padding: 2px 8px;
+                border-radius: 4px;
+                margin-left: 1rem;
+              "
+              >SCI二区 (IF=8.1)</span
+            >
+          </p>
+        </div>
+
+        <!-- 第五篇 -->
         <div
           class="publication-item"
           style="
